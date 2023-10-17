@@ -1,10 +1,12 @@
 package com.apiserratec.biblioteca.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.apiserratec.biblioteca.dto.LivroResumidoDTO;
 import com.apiserratec.biblioteca.entities.Livro;
 import com.apiserratec.biblioteca.repositories.LivroRepository;
 
@@ -24,8 +26,32 @@ public class LivroService {
 		return livroRepo.findAll();
 	}
 
+	public List<LivroResumidoDTO> listarLivrosResumidos() {
+		List<Livro> livros = livroRepo.findAll();
+		List<LivroResumidoDTO> livrosDTO = new ArrayList<>();
+
+		// percorre lista de livros do tipo Livro e insere os dados em um novo
+		// LivroResumido
+		for (Livro livro : livros) {
+			LivroResumidoDTO livroResDTO = new LivroResumidoDTO(livro.getCodigoLivro(), livro.getNomelivro(),
+					livro.getDataLancamento(), livro.getEditora().getNome());
+
+			livrosDTO.add(livroResDTO);
+		}
+		return livrosDTO;
+	}
+
 	public Livro getLivroById(Integer id) {
 		return livroRepo.findById(id).orElse(null);
+	}
+
+	public LivroResumidoDTO getLivroResumidoPorId(Integer id) {
+		Livro livro = livroRepo.findById(id).orElse(null);
+		if (livro != null) {
+			return new LivroResumidoDTO(livro.getCodigoLivro(), livro.getNomelivro(), livro.getDataLancamento(),
+					livro.getEditora().getNome());
+		}
+		return null;
 	}
 
 	public Livro salvarLivro(Livro livro) {
@@ -52,9 +78,8 @@ public class LivroService {
 
 		// verifica se foi deletado de fato
 		Livro livroContinuaExistindo = getLivroById(livro.getCodigoLivro());
-		if (livroContinuaExistindo == null)
-			return true;
-		return false;
+
+		return livroContinuaExistindo == null;
 
 	}
 

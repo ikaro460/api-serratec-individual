@@ -46,6 +46,7 @@ public class AlunoController {
 			return new ResponseEntity<>(aluno, HttpStatus.OK);
 
 	}
+	
 	@GetMapping("/resumido/{id}")
 	public ResponseEntity<AlunoResumidoDTO> getAlunoResumidoPoiId(@PathVariable Integer id) {
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.apiserratec.biblioteca.dto.LivroResumidoDTO;
 import com.apiserratec.biblioteca.entities.Livro;
 import com.apiserratec.biblioteca.services.LivroService;
 
@@ -29,6 +30,11 @@ public class LivroController {
 		return new ResponseEntity<>(livroService.listarLivros(), HttpStatus.OK);
 	}
 
+	@GetMapping("/resumido")
+	public ResponseEntity<List<LivroResumidoDTO>> listarLivrosResumidos() {
+		return new ResponseEntity<>(livroService.listarLivrosResumidos(), HttpStatus.OK);
+	}
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Livro> buscarPorId(@PathVariable Integer id) {
 		Livro livro = livroService.getLivroById(id);
@@ -37,6 +43,18 @@ public class LivroController {
 			return new ResponseEntity<>(livro, HttpStatus.NOT_FOUND);
 		else
 			return new ResponseEntity<>(livro, HttpStatus.OK);
+	}
+
+	@GetMapping("/resumido/{id}")
+	public ResponseEntity<LivroResumidoDTO> getLivroResumidoPoiId(@PathVariable Integer id) {
+
+		LivroResumidoDTO livroResDTO = livroService.getLivroResumidoPorId(id);
+
+		if (livroResDTO == null)
+			return new ResponseEntity<>(livroResDTO, HttpStatus.NOT_FOUND);
+		else
+			return new ResponseEntity<>(livroResDTO, HttpStatus.OK);
+
 	}
 
 	@PostMapping
