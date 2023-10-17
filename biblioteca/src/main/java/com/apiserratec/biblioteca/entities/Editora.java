@@ -17,11 +17,7 @@ import jakarta.persistence.Table;
 	CONSTRAINT alunos_pkey PRIMARY KEY (codigoeditora)
 */
 
-@JsonIdentityInfo(
-		generator = ObjectIdGenerators.PropertyGenerator.class,
-		property = "codigoEditora"
-)
-
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "codigoEditora", scope = Editora.class)
 
 @Entity
 @Table(name = "editora")
@@ -32,25 +28,24 @@ public class Editora {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "codigoeditora")
 	private Integer codigoEditora;
-	
+
 	/* RELACIONAMENTOS */
 	// EDITORA > LIVRO
-	//@JsonManagedReference(value = "editora-livro-ref")
+	// @JsonManagedReference(value = "editora-livro-ref")
 	@OneToMany(mappedBy = "editora")
-	private List <Livro> livros;
-	
+	private List<Livro> livros;
+
 	@Column(name = "nome")
 	private String nome;
-	
+
 	@Column(name = "imagem_nome")
 	private String imagemNome;
-	
+
 	@Column(name = "imagem_filename")
 	private String imagemFileName;
-	
+
 	@Column(name = "imagem_url")
 	private String imagemUrl;
-	
 
 	public Integer getCodigoEditora() {
 		return codigoEditora;
@@ -99,5 +94,5 @@ public class Editora {
 	public void setLivros(List<Livro> livros) {
 		this.livros = livros;
 	}
-	
+
 }

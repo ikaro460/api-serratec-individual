@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
 	CONSTRAINT alunos_pkey PRIMARY KEY (codigoautor)
 */
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "codigoAutor")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "codigoAutor", scope = Autor.class)
 
 @Entity
 @Table(name = "autor")

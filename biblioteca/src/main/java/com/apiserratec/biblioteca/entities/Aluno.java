@@ -20,7 +20,8 @@ import jakarta.persistence.Table;
 
 @JsonIdentityInfo(
 		generator = ObjectIdGenerators.PropertyGenerator.class,
-		property = "numeroMatriculaAluno"
+		property = "numeroMatriculaAluno",
+		scope = Aluno.class
 )
 
 @Entity

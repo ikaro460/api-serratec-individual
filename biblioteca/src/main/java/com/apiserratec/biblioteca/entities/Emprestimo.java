@@ -18,10 +18,7 @@ import jakarta.persistence.Table;
 	CONSTRAINT alunos_pkey PRIMARY KEY (codigoemprestimo)
 */
 
-@JsonIdentityInfo(
-		generator = ObjectIdGenerators.PropertyGenerator.class,
-		property = "codigoEmprestimo"
-)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "codigoEmprestimo", scope = Emprestimo.class)
 
 @Entity
 @Table(name = "emprestimo")
@@ -36,13 +33,13 @@ public class Emprestimo {
 	/* RELACIONAMENTOS */
 
 	// EMPRESTIMOS > ALUNO
-	//@JsonBackReference(value = "aluno-mng-ref")
+	// @JsonBackReference(value = "aluno-mng-ref")
 	@ManyToOne
 	@JoinColumn(name = "numeromatriculaaluno", referencedColumnName = "numeromatriculaaluno")
 	private Aluno aluno;
 
 	// EMPRESTIMO > LIVRO
-	//@JsonBackReference(value = "livro-emprestimo-ref")
+	// @JsonBackReference(value = "livro-emprestimo-ref")
 	@ManyToOne
 	@JoinColumn(name = "codigolivro", referencedColumnName = "codigolivro")
 	private Livro livro;
