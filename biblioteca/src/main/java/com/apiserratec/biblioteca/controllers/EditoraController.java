@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.apiserratec.biblioteca.dto.EditoraDTO;
 import com.apiserratec.biblioteca.entities.Editora;
 import com.apiserratec.biblioteca.services.EditoraService;
 
@@ -42,6 +43,11 @@ public class EditoraController {
 	@PostMapping
 	public ResponseEntity<Editora> salvar(@RequestBody Editora editora) {
 		return new ResponseEntity<>(editoraService.salvarEditora(editora), HttpStatus.OK);
+	}
+	
+	@PostMapping("/dto")
+	public ResponseEntity<EditoraDTO> salvarDTO(@RequestBody EditoraDTO editoraDTO) {
+		return new ResponseEntity<>(editoraService.salvarEditoraDTO(editoraDTO), HttpStatus.OK);
 	}
 
 	@PutMapping
