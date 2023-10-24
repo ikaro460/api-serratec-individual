@@ -42,7 +42,7 @@ public class Editora {
 	private String imagemNome;
 
 	@Column(name = "imagem_filename")
-	private String imagemFileName;
+	private byte[] imagemFileName;
 
 	@Column(name = "imagem_url")
 	private String imagemUrl;
@@ -71,11 +71,11 @@ public class Editora {
 		this.imagemNome = imagemNome;
 	}
 
-	public String getImagemFileName() {
+	public byte[] getImagemFileName() {
 		return imagemFileName;
 	}
 
-	public void setImagemFileName(String imagemFileName) {
+	public void setImagemFileName(byte[] imagemFileName) {
 		this.imagemFileName = imagemFileName;
 	}
 
